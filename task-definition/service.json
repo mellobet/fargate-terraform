@@ -1,0 +1,20 @@
+[
+    {
+        "name": "nginx",
+        "image": "nginx/nginx:latest",
+        "cpu": 256,
+        "memory": 512,
+        "essential": true,
+        "mountPoints": [],
+        "environment": [
+            {"name": "VARNAME", "value": "VARVAL"}
+        ],
+        "portMappings": [
+            {
+                "containerPort": 80,
+                "hostPort": 80,
+                "protocol": "tcp"
+            }
+        ]
+    }
+]

@@ -9,3 +9,7 @@ variable "ecs_cluster_name" {
 variable "vpc_cidr" {
     default = "10.1.0.0/16"
 }
+
+variable "execution_role_arn" {
+    default = "arn:aws:iam::005373091483:role/ecsTaskExecutionRole"
+}
