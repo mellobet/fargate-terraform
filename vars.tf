@@ -3,5 +3,9 @@ variable "region" {
 }
 
 variable "ecs_cluster_name" {
-    default =  "ezr-tf-ecs-cluster"
+    default = "ezr-tf-ecs-cluster"
+}
+
+variable "vpc_cidr" {
+    default = "10.1.0.0/16"
 }
