@@ -1,7 +1,7 @@
 [
     {
         "name": "nginx",
-        "image": "nginx/nginx:latest",
+        "image": "nginx:latest",
         "cpu": 256,
         "memory": 512,
         "essential": true,
