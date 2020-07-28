@@ -4,3 +4,5 @@ desired_task_number = 1
 region = "us-east-1"
 availability_zone_ps1 = "us-east-1a"
 availability_zone_ps2 = "us-east-1b"
+task_cpu = 256
+task_mem = 512
