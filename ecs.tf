@@ -27,4 +27,23 @@ resource "aws_ecs_service" "ecs_service" {
         security_groups = [aws_security_group.ecs_security_group.id]
         assign_public_ip = true
     }
+
+}
+
+resource "aws_alb_target_group" "ecs_app_target_group" {
+    name        = "${var.ecs_service_name}-TG"
+    port        = 80
+    protocol    = "HTTP"
+    vpc_id      = aws_vpc.tf-main-vpc.id
+    target_type = "ip"
+
+    health_check {
+        path                = "/"
+        protocol            = "HTTP"
+        matcher             = "200"
+        interval            = 60
+        timeout             = 10
+        unhealthy_threshold = "3" # Tries
+        healthy_threshold   = "3" # Tries
+    }
 }
