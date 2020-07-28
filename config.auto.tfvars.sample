@@ -1,2 +1,2 @@
-execution_role_arn = "arn:aws:iam::XXXXXXXX:role/ecsTaskExecutionRole"
+execution_role_arn = ""
 environment_tag = "development"
