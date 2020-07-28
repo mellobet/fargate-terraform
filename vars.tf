@@ -3,7 +3,7 @@ variable "region" {
 }
 
 variable "ecs_cluster_name" {
-    default = "ezr-tf-ecs-cluster"
+    default = "web-tf-ecs-cluster"
 }
 
 variable "vpc_cidr" {
@@ -22,19 +22,14 @@ variable "internet_cidr_blocks" {
     default = "0.0.0.0/0"
 }
 
-variable "execution_role_arn" {
-    default = "arn:aws:iam::005373091483:role/ecsTaskExecutionRole"
-}
+variable "execution_role_arn" {}
 
 variable "ecs_service_name" {
-    default = "ezr-svc"
+    default = "web-svc"
 }
 
 variable "desired_task_number" {
     default = 1
 }
 
-variable "environment_tag" {
-  description = "Environment tag"
-  default = "development"
-}
+variable "environment_tag" {}
