@@ -28,6 +28,21 @@ resource "aws_subnet" "public_subnet_1" {
 }
 
 
+# Route (all through gw)
+resource "aws_route_table" "rtb_public" {
+  vpc_id = aws_vpc.tf-main-vpc.id
+  route {
+      cidr_block = "0.0.0.0/0"
+      gateway_id = aws_internet_gateway.igw.id
+  }
+}
+
+# Route assoc (subnet - route)
+resource "aws_route_table_association" "rta_subnet_public" {
+  subnet_id      = aws_subnet.public_subnet_1.id
+  route_table_id = aws_route_table.rtb_public.id
+}
+
 # Create a security group
 resource "aws_security_group" "ecs_security_group" {
     name   = "${var.ecs_cluster_name}-HTTP-SG"
@@ -59,19 +74,4 @@ resource "aws_security_group" "ecs_security_group" {
         protocol    = "-1"
         cidr_blocks = [var.internet_cidr_blocks]
     }
-}
-
-# Route
-resource "aws_route_table" "rtb_public" {
-  vpc_id = aws_vpc.tf-main-vpc.id
-  route {
-      cidr_block = "0.0.0.0/0"
-      gateway_id = aws_internet_gateway.igw.id
-  }
-}
-
-# Route assoc (subnet - route)
-resource "aws_route_table_association" "rta_subnet_public" {
-  subnet_id      = aws_subnet.public_subnet_1.id
-  route_table_id = aws_route_table.rtb_public.id
 }
