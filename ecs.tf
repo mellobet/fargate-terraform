@@ -14,6 +14,7 @@ resource "aws_ecs_task_definition" "web-app" {
     execution_role_arn          = var.execution_role_arn
 }
 
+
 resource "aws_ecs_service" "ecs_service" {
     name            = var.ecs_service_name
     task_definition = aws_ecs_task_definition.web-app.id
@@ -27,23 +28,13 @@ resource "aws_ecs_service" "ecs_service" {
         security_groups = [aws_security_group.ecs_security_group.id]
         assign_public_ip = true
     }
-
 }
+
 
 resource "aws_alb_target_group" "ecs_app_target_group" {
     name        = "${var.ecs_service_name}-TG"
-    port        = 80
-    protocol    = "HTTP"
+    port        = 80 # Req when using type="ip"
+    protocol    = "HTTP" # Req when using type="ip"
     vpc_id      = aws_vpc.tf-main-vpc.id
-    target_type = "ip"
-
-    health_check {
-        path                = "/"
-        protocol            = "HTTP"
-        matcher             = "200"
-        interval            = 60
-        timeout             = 10
-        unhealthy_threshold = "3" # Tries
-        healthy_threshold   = "3" # Tries
-    }
+    target_type = "ip" # awsvpc only allows "ip"
 }

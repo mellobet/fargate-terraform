@@ -12,7 +12,13 @@ variable "public_subnet1_cidr" {
     default = "10.1.0.0/24"
 }
 
-variable "availability_zone" {}
+variable "public_subnet2_cidr" {
+    default = "10.1.1.0/24"
+}
+
+variable "availability_zone_ps1" {}
+variable "availability_zone_ps2" {}
+
 
 variable "internet_cidr_blocks" {
     default = "0.0.0.0/0"

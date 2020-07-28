@@ -24,7 +24,14 @@ resource "aws_subnet" "public_subnet_1" {
   vpc_id = aws_vpc.tf-main-vpc.id
   cidr_block = var.public_subnet1_cidr
   map_public_ip_on_launch = true
-  availability_zone = var.availability_zone
+  availability_zone = var.availability_zone_ps1
+}
+
+resource "aws_subnet" "public_subnet_2" {
+  vpc_id = aws_vpc.tf-main-vpc.id
+  cidr_block = var.public_subnet2_cidr
+  map_public_ip_on_launch = true
+  availability_zone = var.availability_zone_ps2
 }
 
 
