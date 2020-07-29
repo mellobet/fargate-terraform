@@ -32,3 +32,5 @@ variable "ecs_service_name" {
 
 variable "desired_task_number" {}
 variable "environment_tag" {}
+variable "task_cpu" {}
+variable "task_mem" {}
