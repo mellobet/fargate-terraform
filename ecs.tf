@@ -32,7 +32,7 @@ resource "aws_ecs_service" "ecs_service" {
 
     # Load Balancer
     load_balancer {
-        container_name      = "nginx"
+        container_name      = "tutum-hw"
         container_port      = 80
         target_group_arn    = aws_alb_target_group.ecs_app_target_group.arn
     }

@@ -1,7 +1,7 @@
 [
     {
-        "name": "nginx",
-        "image": "nginx:latest",
+        "name": "tutum-hw",
+        "image": "tutum/hello-world",
         "cpu": 256,
         "memory": 512,
         "essential": true,
