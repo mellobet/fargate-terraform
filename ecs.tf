@@ -2,6 +2,7 @@ resource "aws_ecs_cluster" "web-ecs-cluster" {
     name = var.ecs_cluster_name
 }
 
+
 # Task Definition
 resource "aws_ecs_task_definition" "web-app" {
     family                      = "web-app"
