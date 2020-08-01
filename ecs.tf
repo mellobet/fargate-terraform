@@ -11,7 +11,7 @@ resource "aws_ecs_task_definition" "web-app" {
     requires_compatibilities    = ["FARGATE"]
     container_definitions       = file("task-definition/container_defs.json")
     # task_role_arn               = var.execution_role_arn
-    execution_role_arn          = var.execution_role_arn
+    # execution_role_arn          = var.execution_role_arn
 }
 
 
