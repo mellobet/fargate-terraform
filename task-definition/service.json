@@ -4,7 +4,6 @@
         "image": "tutum/hello-world",
         "cpu": 256,
         "memory": 512,
-        "essential": true,
         "mountPoints": [],
         "environment": [
             {"name": "VARNAME", "value": "VARVAL"}
@@ -15,6 +14,7 @@
                 "hostPort": 80,
                 "protocol": "tcp"
             }
-        ]
+        ],
+        "essential": true
     }
 ]
