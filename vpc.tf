@@ -19,7 +19,7 @@ resource "aws_internet_gateway" "igw" {
 }
 
 
-# Public Subnet
+# Public Subnets
 resource "aws_subnet" "public_subnet_1" {
   vpc_id = aws_vpc.tf-main-vpc.id
   cidr_block = var.public_subnet1_cidr
@@ -44,11 +44,18 @@ resource "aws_route_table" "rtb_public" {
   }
 }
 
-# Route assoc (subnet - route)
-resource "aws_route_table_association" "rta_subnet_public" {
+
+# Route assoc for subnets (subnet - route)
+resource "aws_route_table_association" "rta_subnet_public_1" {
   subnet_id      = aws_subnet.public_subnet_1.id
   route_table_id = aws_route_table.rtb_public.id
 }
+
+resource "aws_route_table_association" "rta_subnet_public_2" {
+  subnet_id      = aws_subnet.public_subnet_2.id
+  route_table_id = aws_route_table.rtb_public.id
+}
+
 
 # Create a security group
 resource "aws_security_group" "ecs_security_group" {
