@@ -9,7 +9,7 @@ resource "aws_ecs_task_definition" "web-app" {
     cpu                         = var.task_cpu
     memory                      = var.task_mem
     requires_compatibilities    = ["FARGATE"]
-    container_definitions       = file("task-definition/service.json")
+    container_definitions       = file("task-definition/container_defs.json")
     # task_role_arn               = var.execution_role_arn
     execution_role_arn          = var.execution_role_arn
 }
