@@ -1,4 +1,5 @@
 # For demo purposes
+# example
 
 This example needs configuration on the following sections:
 
