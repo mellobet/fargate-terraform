@@ -5,9 +5,9 @@ resource "aws_vpc" "tf-main-vpc" {
   # Optionals
   enable_dns_support   = true
   enable_dns_hostnames = true
-  
+
   tags = {
-    Name = "tf-main-vpc"
+    Name        = "tf-main-vpc"
     Environment = var.environment_tag
   }
 }
@@ -21,17 +21,17 @@ resource "aws_internet_gateway" "igw" {
 
 # Public Subnet
 resource "aws_subnet" "public_subnet_1" {
-  vpc_id = aws_vpc.tf-main-vpc.id
-  cidr_block = var.public_subnet1_cidr
+  vpc_id                  = aws_vpc.tf-main-vpc.id
+  cidr_block              = var.public_subnet1_cidr
   map_public_ip_on_launch = true
-  availability_zone = var.availability_zone_ps1
+  availability_zone       = var.availability_zone_ps1
 }
 
 resource "aws_subnet" "public_subnet_2" {
-  vpc_id = aws_vpc.tf-main-vpc.id
-  cidr_block = var.public_subnet2_cidr
+  vpc_id                  = aws_vpc.tf-main-vpc.id
+  cidr_block              = var.public_subnet2_cidr
   map_public_ip_on_launch = true
-  availability_zone = var.availability_zone_ps2
+  availability_zone       = var.availability_zone_ps2
 }
 
 
@@ -39,8 +39,8 @@ resource "aws_subnet" "public_subnet_2" {
 resource "aws_route_table" "rtb_public" {
   vpc_id = aws_vpc.tf-main-vpc.id
   route {
-      cidr_block = "0.0.0.0/0"
-      gateway_id = aws_internet_gateway.igw.id
+    cidr_block = "0.0.0.0/0"
+    gateway_id = aws_internet_gateway.igw.id
   }
 }
 
@@ -52,33 +52,33 @@ resource "aws_route_table_association" "rta_subnet_public" {
 
 # Create a security group
 resource "aws_security_group" "ecs_security_group" {
-    name   = "${var.ecs_cluster_name}-HTTP-SG"
-    description = "BASIC HTTP SG"
-    vpc_id = aws_vpc.tf-main-vpc.id
+  name        = "${var.ecs_cluster_name}-HTTP-SG"
+  description = "BASIC HTTP SG"
+  vpc_id      = aws_vpc.tf-main-vpc.id
 
-    ingress {
-        from_port   = 80
-        to_port     = 80
-        protocol    = "TCP"
-        cidr_blocks = [var.internet_cidr_blocks]
-    }
-    egress {
-        from_port   = 0
-        to_port     = 0
-        protocol    = "-1"
-        cidr_blocks = [var.internet_cidr_blocks]
-    }
+  ingress {
+    from_port   = 80
+    to_port     = 80
+    protocol    = "TCP"
+    cidr_blocks = [var.internet_cidr_blocks]
+  }
+  egress {
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    cidr_blocks = [var.internet_cidr_blocks]
+  }
 
-    ingress {
-        from_port   = 443
-        to_port     = 443
-        protocol    = "TCP"
-        cidr_blocks = [var.internet_cidr_blocks]
-    }
-    egress {
-        from_port   = 0
-        to_port     = 0
-        protocol    = "-1"
-        cidr_blocks = [var.internet_cidr_blocks]
-    }
+  ingress {
+    from_port   = 443
+    to_port     = 443
+    protocol    = "TCP"
+    cidr_blocks = [var.internet_cidr_blocks]
+  }
+  egress {
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    cidr_blocks = [var.internet_cidr_blocks]
+  }
 }
